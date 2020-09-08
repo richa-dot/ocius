@@ -1,0 +1,55 @@
+<div>
+    <div class="page-content page-container" id="page-content">
+        <h1>User List</h1>
+        <div class="padding">
+            <router-link title="Add" class="cursor__pointer" tag="li" to="/updateUser">
+                <button>Add</button>
+            </router-link>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="list list-row block" v-if="usersList.length>0">
+                        <div class="list-item" data-id="19" v-for="user in usersList">
+                            <div>
+                                <a href="#" data-abc="true">
+                                    <span class="w-48 avatar gd-warning" v-if="!user.profileImagePath">
+                                        S
+                                    </span>
+                                    <span v-else class="w-48 avatar gd-primary">
+                                        <img src="https://img.icons8.com/color/48/000000/administrator-male.png"
+                                            alt=".">
+                                        < </span>
+                                </a>
+                            </div>
+                            <div class="flex"> <a href="#" class="item-author text-color"
+                                    data-abc="true">{{user.firstName}}</a>
+                            </div>
+                            <div class="flex"> <a href="#" class="item-author text-color"
+                                    data-abc="true">{{user.lastName}}</a>
+                            </div>
+                            <div class="flex"> <a href="#" class="item-author text-color"
+                                    data-abc="true">{{user.email}}</a>
+                            </div>
+                            <div class="flex"> <a href="#" class="item-author text-color"
+                                    data-abc="true">{{user.address}}</a>
+                            </div>
+                            <div class="no-wrap">
+                                <div class="item-date text-muted text-sm d-none d-md-block">
+                                    {{user.dob | moment("ddd, MMMM D, YYYY")}}</div>
+                            </div>
+                            <div class="no-wrap">
+                                <div class="item-date text-muted text-sm d-none d-md-block">
+                                    <button @click="deleteUser(user._id)">Delete</button>
+                                    <router-link title="Edit" class="cursor__pointer" tag="li"
+                                        :to="{path:'/updateUser', query:{userId:user._id}}">
+                                        <button>Edit</button>
+                                    </router-link>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div v-else> No user list found</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

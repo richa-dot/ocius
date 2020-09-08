@@ -1,0 +1,49 @@
+<div>
+    <form @submit.prevent="validateAndSave">
+        <div class="container">
+            <h1>{{$route.query.userId?'Edit User':'Add User'}}</h1>
+            <router-link title="Add" class="cursor__pointer" tag="li" to="/">
+                <button>back</button>
+            </router-link>
+            <hr>
+
+            <label for="firstName"><b>First Name</b></label>
+            <input type="text" placeholder="Enter First Name" name="firstName" id="firstName" v-model="user.firstName"
+                v-validate="'required'">
+            <span v-show="errors.has('firstName')" class="error_text">{{ errors.first('firstName') }}</span>
+            <br>
+            <label for="lastName"><b>Last Name</b></label>
+            <input type="text" placeholder="Enter Last Name" name="lastName" id="lastName" v-model="user.lastName"
+                v-validate="'required'">
+            <span v-show="errors.has('lastName')" class="error_text">{{ errors.first('lastName') }}</span>
+            <br>
+            <label for="email"><b>Email</b></label>
+            <input type="text" placeholder="Enter Email" name="email" id="email" v-model="user.email"
+                v-validate="'required|email'">
+            <span v-show="errors.has('email')" class="error_text">{{ errors.first('email') }}</span>
+            <span v-show="emailExist" class="error_text">The email has already been taken.</span>
+            <br>
+            <label for="address"><b>Address</b></label>
+            <input type="text" placeholder="Enter Address" name="address" id="address" v-model="user.address"
+                v-validate="'required'">
+            <span v-show="errors.has('address')" class="error_text">{{ errors.first('address') }}</span>
+            <br>
+            <label for="date"><b>Date of birth</b></label>
+            <date-picker name="date" :bootstrap-styling="true" format="MMM dd yyyy" v-model="user.dob"
+                data-vv-as="date of birth" placeholder="Choose Date" v-validate="'required'"></date-picker>
+            <span v-show="errors.has('date')" class="error_text">{{ errors.first('date') }}</span>
+            <br>
+            <label for="date"><b>upload profile image</b></label>
+            <input title="Choose files" type="file" accept="image/*" @change="fileChangeEvent" v-validate="'size:2000'"
+                data-vv-as="profile image" name="file" />
+            </span>
+            <div v-show="imageSrc" class="main-box-logo">
+                <img class="logo-img" :src="imageSrc" alt="Profile Image">
+            </div>
+            <hr>
+
+            <button type="submit" class="registerbtn">{{$route.query.userId?'Update':'Submit'}}</button>
+        </div>
+
+    </form>
+</div>
